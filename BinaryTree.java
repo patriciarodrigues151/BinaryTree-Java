@@ -1,14 +1,15 @@
+
 class Node
 {
-    //int data;
-    //Node left;
-    //Node right;
+    int data;
+    Node left;
+    Node right;
 
     public Node(int item)
     {
-        int data = item;
-        Node left = null;
-        Node right = null;
+        data = item;
+        left = null;
+        right = null;
     }
 }
 
@@ -22,9 +23,9 @@ class BinaryTree
     }
 
     //aqui não usarei o método recursivo de inserção, mas é perfeitamente possível usar 
-    void insert(int data)
+    void insert(int key)
     {
-        Node newNode = new Node(data);
+        Node newNode = new Node(key);
 
         if(root == null)
         {
@@ -35,18 +36,28 @@ class BinaryTree
         Node roda = root;
         while(true)
         {
-            if(data < current.data)
+            if(key < roda.data)
             {
-                if(data.left == null)
+                if(roda.left == null)
                 {
-                    data.left = newNode;
+                    roda.left = newNode;
+                    break;
+                }
+                else
+                {
+                    roda = roda.left;
                 }
             }
             else
             {
-                if(data.right == null)
+                if(roda.right == null)
                 {
-                    data.right = newNode;
+                    roda.right = newNode;
+                    break;
+                }
+                else
+                {
+                    roda = roda.right;
                 }
             }
         }
@@ -62,12 +73,30 @@ class BinaryTree
     {
         if(root != null)
         {
-            InOrder(no.left);
+            InOrder(root.left);
             System.out.print(root.data + " ");
-            InOrder(no.right);
+            InOrder(root.right);
         }
     }
 }
 
 
+public class Main
+{
+    public static void main(String[] args)
+    {
+        BinaryTree tree = new BinaryTree();
+        
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(20);
+        tree.insert(40);
+        tree.insert(70);
+        tree.insert(60);
+        tree.insert(80);
+        
+        System.out.print("Inorder: ");
+        tree.InOrder();
+    }
+}
 
